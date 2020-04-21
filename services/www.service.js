@@ -34,10 +34,9 @@ module.exports = {
 	methods: {
 		initRoutes(app) {
 			app.get("/users", this.allUsers);
-			app.get("/search", this.searchPosts);
-			app.get("/category/:category", this.categoryPosts);
-			app.get("/author/:author", this.authorPosts);
-			app.get("/post/:id/:title?", this.getPost);
+			app.get("/filtered_users", this.filteredUser);
+			app.get("/sendmail", this.sendMail);
+		
 		},
 
 		/**
@@ -61,25 +60,29 @@ module.exports = {
 			}
 		},
 
+		async filteredUser(req, res){
+			const pageSize = this.settings.pageSize;
+			const page = Number(req.query.page || 1);
+			try {
+				const data = await this.broker.call("users.filteredUser");
+
+				
+				return res.json({data:data});
+			} catch (error) {
+				return this.handleErr(error);
+			}
+		},
+
 		/**
 		 *
 		 * @param {Request} req
 		 * @param {Response} res
 		 */
-		async categoryPosts(req, res) {
-			const pageSize = this.settings.pageSize;
-			const page = Number(req.query.page || 1);
-			const category = req.params.category;
-
+		async sendMail(req, res) {
 			try {
-				const data = await this.broker.call("posts.list", { query: { category }, page, pageSize, populate: ["author", "likes"] });
+				const data = await this.broker.call("users.sendMail");
 
-				let pageContents = {
-					posts : data.rows,
-					totalPages: data.totalPages
-				};
-				pageContents = await this.appendAdditionalData(pageContents);
-				return res.render("index", pageContents);
+				return res.json({data:"mail sent"});
 			} catch (error) {
 				return this.handleErr(error);
 			}

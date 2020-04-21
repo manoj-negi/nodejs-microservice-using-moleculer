@@ -4,22 +4,25 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-	username: {
-		type: String,
-		unique: true,
-		index: true,
-		lowercase: true,
-		required: "Please fill in a username",
-		trim: true
-	},
-	password: {
-		type: String,
-		required: "Please fill in a password"
-	},
-	fullName: {
+	name: {
 		type: String,
 		trim: true,
 		"default": ""
+	},
+	image:{
+		type: String,
+		trim: true,
+		"default": ""
+	},
+	age:{
+		type: Number,
+		trim: true,
+		required: "age is required"
+	},
+	phone:{
+		type: String,
+		trim: true,
+		required: "Number is required"
 	},
 	email: {
 		type: String,
@@ -29,22 +32,16 @@ let UserSchema = new Schema({
 		lowercase: true,
 		required: "Please fill in an email"
 	},
-	author: {
-		type: Boolean,
-		"default": false
-	},
-	avatar: {
-		type: String
+	salary:{
+		 type: Number,
+		 trim:true,
+		 required:"Salary Required"
 	}
+	
 }, {
 	timestamps: true
 });
 
-// Add full-text search index
-UserSchema.index({
-	//"$**": "text"
-	"fullName": "text",
-	"username": "text"
-});
+
 
 module.exports = mongoose.model("User", UserSchema);
