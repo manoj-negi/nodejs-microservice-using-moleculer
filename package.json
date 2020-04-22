@@ -3,9 +3,8 @@
   "version": "3.0.0",
   "description": "Blog examples for Moleculer framework",
   "scripts": {
-    "start": "moleculer-runner",
+    "start": "moleculer-runner --repl --hot services",
     "dev": "moleculer-runner --repl --hot services",
-    "docker:build": "docker build -t moleculer-blog .",
     "deps": "npm-check -u"
   },
   "author": "MoleculerJS",

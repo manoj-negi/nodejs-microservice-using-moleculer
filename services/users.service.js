@@ -28,7 +28,9 @@ module.exports = {
 			}
 		},
 		sendMail:{
+			//
 			handler(ctx){
+				
 				const email = new Email({
 					message: {
 					  from: 'niftylettuce@gmail.com'
