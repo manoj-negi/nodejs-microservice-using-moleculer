@@ -8,7 +8,7 @@ const CacheCleaner = require("../mixins/cache.cleaner.mixin");
 const Fakerator = require("fakerator");
 const Email = require('email-templates');
 const fake = new Fakerator();
-
+ 
 
 module.exports = {
 	name: "users",
