@@ -12,7 +12,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "email-templates": "^7.0.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fakerator": "^0.3.1",
     "hashids": "2.2.1",
     "ioredis": "^4.14.1",
